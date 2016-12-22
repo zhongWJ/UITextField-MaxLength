@@ -1,4 +1,4 @@
-# ZHMaxLengthTextField
+# UITextField+MaxLength
 控制UITextField最长字节长度UITextField+MaxLength分类
 
 在项目中，会遇到需要限制UITextField字节长度需求。也就是对输入的unicode字节长度做限制。一般一个英文或数字一个字节，汉字两个字节。
