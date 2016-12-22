@@ -22,16 +22,20 @@
     NSString *destString = textField.text;
     NSString *lastString = textField.lastTextContent;
     
-    UITextRange *markedTextRange = [textField markedTextRange];
     if ([destString charLength] <= textField.charMaxLength) {
         textField.lastTextContent = destString;
         return;
     }
     
+    //对中文输入做特殊处理，当正在输入中文时，输入框中拼音处于marked状态，
+    //故此时不做长度限制判断
+    UITextRange *markedTextRange = [textField markedTextRange];
     if (markedTextRange && ![markedTextRange isEmpty]) {
         return;
     }
 
+    //此处是考虑到UITextField初始内容长度就超过了最长限制，那么限制用户
+    //只能删减直到达到长度限制。
     if ([lastString charLength] > textField.charMaxLength && [destString length] < [lastString length]) {
         textField.lastTextContent = destString;
         return;
